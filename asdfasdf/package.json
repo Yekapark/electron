@@ -1,0 +1,12 @@
+{
+    "name": "EZCode",
+    "version": "1.0.0",
+    "main": "main.js",
+    "dependencies": {
+        "async": "^3.1.0",
+        "jquery": "^3.4.1",
+        "lunr": "^1.0.0",
+        "osenv": "^0.1.5",
+        "type": "module"
+    }
+}
