@@ -1,43 +1,73 @@
 <html>
-  <head>
-    <title>댄.싱.머.신</title>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="css/app.css">
-    <!-- <script src="js/app.js"></script> -->
-  </head>
-  
-  <body>
-    
-    <template id="item-template">
+<head>
+  <title>댄.싱.머.신</title>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+  <script>window.$ = window.jQuery = require('jquery');</script>
+  <link rel="stylesheet" href="css/app.css">
+  <!-- <script src="js/app.js"></script> -->
+</head>
 
-      <div class="item">
-        <img class="icon" />
-        <div class="filename"></div>
-      </div>
-    </template>
+<body>
 
-    <div id="toolbar">
-      <input type="search" id="search" results=5 placeholder="search" />
-      <div id="current-folder">
-        <script src="js/app.js">
-          document.write(getUsersHomeFolder());
-        </script>
-      </div>
+  <template id="item-template">
+
+    <div class="item">
+      <img class="icon" />
+      <div class="filename"></div>
     </div>
-    <div>
-      <div id="main-area"></div>
-    </div>
-    <div class="dd">
+  </template>
 
-      <a href="gogo.html">ddddddddddddddddddddddddddddd</a>
+  <div id="toolbar">
+    <input type="button" id="searchBtn" value="검색" />
+    <input type="search" id="search" results=5 placeholder="Search Folder" />
+    <div id="current-folder">
+      <script src="js/app.js">
+        document.write(getUsersHomeFolder());
+      </script>
     </div>
+    <input class="pathVal" type="hidden" onchange="">
+  </div>
 
-  </body>
-  <!-- <script src="js/jquery-3.4.1.min.js"></script>
+
+
+
+  <div>
+    <div id="main-area"></div>
+  </div>
+
+
+
+</body>
+<!-- <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/script.js"></script>
   <script src="main.js"></script> -->
+
+<script src="js/submittest.js"></script>
+<script src="js/parse.js"></script>
+<script>
+
+  var keyword = "for";
+  var lastVal = $("#current-folder").children(':last').attr('data-path')
+  $(".pathVal").val(lastVal)
+
+
+
+
+  $(document).on('click dblclick', function () {
+    lastVal = $("#current-folder").children(':last').attr('data-path')
+    $(".pathVal").val(lastVal)
+  })
+
+
+  $('#searchBtn').on('click', function () {
+
+    lastVal = $("#current-folder").children(':last').attr('data-path')
+    $(".pathVal").val(lastVal)
+
+    replay(lastVal)
+
+
+  })
+</script>
 </html>
-
-
-

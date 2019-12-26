@@ -5,8 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <!-- <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="./js/jquery-3.4.1.min.j
+    s"></script>
+    <script>if (window.module) module = window.module;</script> -->
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="js/submittest.js"></script>
 </head>
 <body>
-    
+    <form method="POST" action="gogogo.html">
+        <input type="text" name="qq" class="qq" value="asdfasdfa">
+        <!-- <button><a class="gi" onclick="cl()">보내기</a> -->
+        <input type="submit" value="보내기">
+    </form>
 </body>
+
+<!-- <script>
+    // $(document).ready(function(){
+        function cl() {
+            var name = $(".qq").val();
+            location.href="gogogo.html?" + name;
+        }
+    // })
+</script> -->
+
+<script>
+</script>
+
 </html>

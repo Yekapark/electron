@@ -6,7 +6,16 @@
         "async": "^3.1.0",
         "jquery": "^3.4.1",
         "lunr": "^1.0.0",
+        "mysql": "^2.17.1",
         "osenv": "^0.1.5",
         "type": "module"
+    },
+    "devDependencies": {
+        "electron": "^7.1.7",
+        "electron-builder": "^21.2.0"
+    },
+    "scripts": {
+        "pack": "electron-builder",
+        "dist": "build"
     }
 }

@@ -23,7 +23,7 @@ let index;
 // fileSystem.js
 
 function getUsersHomeFolder(){
-    return osenv.home();
+    return osenv.home() + '\\Desktop';
 }
 
 function getFilesInFolder(folderPath, cb){
@@ -192,7 +192,7 @@ function main(){
         if(err){
             return alert('Sorry, we could not load your home folder');
         }
-        inspectAndDescribeFiles(folderPath, files, displayFiles);
+        inspectAndDescribeFiles(folderPath, files);  // 여기 마지막에 , displayFiles 있었음.
     });
 
     loadDirectory(folderPath)(window);
