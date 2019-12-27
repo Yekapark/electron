@@ -59,9 +59,154 @@ body{
     float: right;
     border-radius: 3em;
     padding: 0.5em;
-    margin: 1.5em 1em;
+    margin: 1.5% 1em;
     background-color: skyblue;
     border-style: dotted;
     border-color: deeppink;
     border-width: 5px;
+  }
+
+  .searchBtn{
+    float: right;
+    border-radius: 3em;
+    padding: 0.5em;
+    margin: 1.5% 1em;
+    background-color: skyblue;
+    border-style: dotted;
+    border-color: deeppink;
+    border-width: 5px;
+  }
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+  }
+  
+  /* Modal Content */
+  /* .modal-content {
+    margin: auto;
+    position: relative;
+    top: 30%;
+    background-color: #fefefe;
+    width:  40em;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+  } */
+  
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    top: 30%;
+    position: relative;
+    margin: auto;
+    width:  30em;
+    padding: 2px 16px;
+    background-color: skyblue;
+    color: white;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+    
+  }
+  
+  .modal-body {
+    position: relative;
+    margin: auto;
+    top: 30%;
+    height: 100px;
+    background-color: whitesmoke;
+    padding: 2px 16px;
+    width:  30em;
+  }
+
+  .modal-body span{
+    width: 100%;
+    
+  }
+
+  .mobo {
+    display: flex;
+  }
+
+  .mobo div {
+    margin-top: 5px;
+    flex-direction: row;
+  }
+  .mobo div label {
+    display: block;
+    margin-left: 10px;
+  }
+  
+  
+  .modal-footer {
+    top: 30%;
+    position: relative;
+    margin: auto;
+    width:  30em;
+    padding: 2px 16px;
+    background-color: skyblue;
+    color: white;
+    -webkit-animation-name: slideInFoot;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInFoot;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes slideIn {
+    from {top: 70%; opacity: 0} 
+    to {top: 30%; opacity: 1}
+  }
+  
+  @keyframes slideIn {
+    from {top: 70%; opacity: 0}
+    to {top: 30%; opacity: 1}
+  }
+
+  @-webkit-keyframes slideInFoot {
+    from {top: 00%; opacity: 0} 
+    to {top: 30%; opacity: 1}
+  }
+  
+  @keyframes slideInFoot {
+    from {top: 00%; opacity: 0}
+    to {top: 30%; opacity: 1}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
   }

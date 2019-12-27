@@ -1,3 +1,6 @@
+
+
+
 function parsing(lastVal) {
 
     const ff = require('fs');
@@ -10,6 +13,9 @@ function parsing(lastVal) {
     // console.log(keyword);
 
     ff.readFile(filePath, 'utf8', function (err, data) {
+        var allKeyword = true;
+        var keywordOn = false;
+
         var code = '';
         var isComment = false;
         var isBrace = false;
@@ -51,28 +57,41 @@ function parsing(lastVal) {
 
 
                 /////////////////////////////////////////////////////////
-                if (array[i].trim().startsWith('/*')) {
-                    isComment = true;
-                }
+                if ($(".commentVal").val() === 'c') {
+                    if (array[i].trim().startsWith('/*')) {
+                        isComment = true;
+                    }
 
-                if (isComment) {
-                    if (array[i].includes(keyword)) {
-                        code = "";
-                        maxline = 0;
-                        isCode = true;
+                    if (isComment) {
+                        if (array[i].includes(keyword)) {
+                            code = "";
+                            maxline = 0;
+                            isCode = true;
+                        }
+                    }
+
+                    if (array[i].trim().startsWith('*/')) {
+                        isComment = false;
+                    }
+                    /////////////////////////////////////////////////////////
+
+
+
+                    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    if (array[i].trim().startsWith('//')) {
+                        if (array[i].includes(keyword)) {
+                            code = "";
+                            maxline = 0;
+                            isCode = true;
+
+                            k = i + 11;
+                        }
                     }
                 }
-
-                if (array[i].trim().startsWith('*/')) {
-                    isComment = false;
-                }
-                /////////////////////////////////////////////////////////
-
-
-
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                if(array[i].trim().startsWith('//')){
-                    if (array[i].includes(keyword)) {
+                else{
+                    if (array[i].includes(keyword) && !keywordOn) {
+                        keywordOn = true;
                         code = "";
                         maxline = 0;
                         isCode = true;
@@ -82,20 +101,24 @@ function parsing(lastVal) {
                 }
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+                
                 maxline++;
 
+
+                
 
 
                 if (isCode) {
                     isBrace = ((array[i].includes("{")) != -1 || (array[i].includes("}"))) ? true : isBrace;
                 }
                 //////////////////////////////////////////////////////////
-                if(isCode && tenline){
-                    if(i <= k){
+                if (isCode && tenline) {
+                    if (i <= k) {
                         code += array[i] + '\n';
                         isBrace = false;
                     }
-                    if(i == k+1){
+                    if (i == k + 1) {
+                        codeList.push(code);
                         console.log(code);
                         code = "";
                         flag = false;
@@ -110,12 +133,12 @@ function parsing(lastVal) {
                 else if (isCode && isBrace) {
                     code += array[i] + '\n';
 
-                    if(flag && tbrace >= 2){
+                    if (flag && tbrace >= 2) {
                         tenline = true;
                         tbrace = 0;
                     }
 
-                    else if(isCode && !flag){
+                    else if (isCode && !flag) {
                         if (array[i].includes("{")) {
                             checkBrace.push("{");
                             blank = false;
@@ -125,6 +148,7 @@ function parsing(lastVal) {
                             blank = true;
                         }
                         if (checkBrace.length === 0 && blank) {
+                            codeList.push(code);
                             console.log(code);
                             code = '';
                             blank = false;
@@ -135,13 +159,14 @@ function parsing(lastVal) {
                     }
                 }
                 //////////////////////////////////////////////////////////
-                else if(isCode && !isBrace){
+                else if (isCode && !isBrace) {
                     code += array[i] + '\n';
-                    if(i <= k){
+                    if (i <= k) {
                         code += array[i] + '\n';
                         isBrace = false;
                     }
-                    if(i == k+1){
+                    if (i == k + 1) {
+                        codeList.push(code);
                         console.log(code);
                         code = "";
                         flag = false;
@@ -155,4 +180,7 @@ function parsing(lastVal) {
             }                                               // java파일 한줄씩 비교 끝
         }
     });
+    if(codeList !== null){
+    console.log(codeList)
+    }
 }

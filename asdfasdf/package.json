@@ -4,10 +4,13 @@
     "main": "main.js",
     "dependencies": {
         "async": "^3.1.0",
+        "bootstrap": "^4.4.1",
+        "enlighterjs": "^2.10.1",
         "jquery": "^3.4.1",
         "lunr": "^1.0.0",
         "mysql": "^2.17.1",
         "osenv": "^0.1.5",
+        "popper.js": "^1.16.0",
         "type": "module"
     },
     "devDependencies": {
