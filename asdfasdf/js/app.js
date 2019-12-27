@@ -232,6 +232,7 @@ function convertFolderPathIntoLinks(folderPath){
 
 function bindCurrentFolderPath(){
     const load = (event) => {
+        $('.code-content').html('');
         const folderPath = event.target.getAttribute('data-path');
         loadDirectory(folderPath)();
     };

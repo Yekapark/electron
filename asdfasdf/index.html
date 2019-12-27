@@ -4,8 +4,13 @@
   <title>댄.싱.머.신</title>
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
   <script>window.$ = window.jQuery = require('jquery');</script>
+  
   <link rel="stylesheet" href="css/app.css">
   <!-- <script src="js/app.js"></script> -->
+  <!-- <script type="text/javascript" src="js/enlighterjs.min.js" ></script>
+  <link rel="stylesheet" type="text/css" href="css/enlighterjs.min.css" /> -->
+  <script type="text/javascript" src="js/prism.js" ></script>
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
 </head>
 
 <body>
@@ -24,15 +29,18 @@
 
     <button id="myBtn" class="searchBtn">검 색 조 건</button>
 
+    <input type="text" id="keyword" placeholder="Keyword">
+
     <div id="current-folder">
       <script src="js/app.js">
         document.write(getUsersHomeFolder());
       </script>
     </div>
-    
-    <form class="hidform" method="GET" action="list.html">
+
+    <form class="hidform" method="GET" action="index.html">
       <input class="pathVal" type="hidden"> <!-- 폴더 경로 보내줌 -->
       <input class="commentVal" name="commentVal" type="hidden"> <!-- 폴더 경로 보내줌 -->
+      <input class="keywordVal" type="hidden">
     </form>
   </div>
 
@@ -40,61 +48,67 @@
   <div id="myModal" class="modal">
     <!-- Modal content -->
     <!-- <div class="modal-content"> -->
-      <div class="modal-header">
-        <span class="close">&times;</span>
-        <h2 style="text-align: center;">검 색 조 건</h2>
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2 style="text-align: center;">검 색 조 건</h2>
+    </div>
+
+
+    <div class="modal-body mobo">
+      <div style="font-size: larger;">커멘트</div>
+      <div style="width: 35%;">
+        <label for="">
+          <input checked onclick="oneCheckbox(this)" name="checkbox1" type="checkbox" value="c">Only Comment
+        </label>
+        <label for="" style="margin-top: 10px;">
+          <input onclick="oneCheckbox(this)" name="checkbox1" type="checkbox" value="a">All
+        </label>
       </div>
 
-
-      <div class="modal-body mobo">
-        <div style="font-size: larger;">커멘트</div>
-        <div style="width: 35%;">
-          <label for="">
-            <input checked onclick="oneCheckbox(this)" name="checkbox1" type="checkbox" value="c">Only Comment
-          </label>
-          <label for="" style="margin-top: 10px;">
-            <input onclick="oneCheckbox(this)" name="checkbox1" type="checkbox" value="a">All
-          </label>
-        </div>
-
-        <div>커멘트</div>
-        <div style="width: 35%;">
-          <label for="">
+      <div>커멘트</div>
+      <div style="width: 35%;">
+        <label for="">
           <input type="checkbox">1
         </label>
         <label for="" style="margin-top: 10px;">
           <input type="checkbox">2
         </label>
-        </div>
-
       </div>
 
+    </div>
 
-      <div class="modal-footer">
-        <h3>Modal Footer</h3>
-      </div>
+
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
     <!-- </div> -->
   </div>
 
-
+  <div style="margin-top: 93px;" class="code-content">
+  </div>
   <div>
     <div id="main-area"></div>
   </div>
-
-
+ 
+  
 
 </body>
 <!-- <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/script.js"></script>
   <script src="main.js"></script> -->
 
+
+
 <script src="js/submittest.js"></script>
 <script src="js/parse.js"></script>
-<script src="js/mysql.js"></script>
+<!-- <script src="js/mysql.js"></script> -->
+
 <script>
 
+  var codeList = new Array();
 
-  var keyword = "for";
+
+  var keyword = $('#keyword').val();
   var lastVal = $("#current-folder").children(':last').attr('data-path')
   var commentVal = $("input:checkbox[name='checkbox1']:checked").val();
   $(".pathVal").val(lastVal)
@@ -106,50 +120,61 @@
   $(document).on('click dblclick', function () {
     lastVal = $("#current-folder").children(':last').attr('data-path')
     commentVal = $("input:checkbox[name='checkbox1']:checked").val();
+    keywordVal = $('#keyword').val()
+    $('.keywordVal').val(keywordVal)
     $(".pathVal").val(lastVal)
     $(".commentVal").val(commentVal)
   })
 
 
   $('#searchBtn').on('click', function () {
-
+    keyword = $('#keyword').val();
     lastVal = $("#current-folder").children(':last').attr('data-path')
     $(".pathVal").val(lastVal)
 
     replay(lastVal)
-    
-    // $('.hidform').submit();
+
+    $.ajax({
+      type: "POST",
+      url: "index.html",
+      success: function (data) {
+      },
+      error: function (xhr, status, error) {
+        alert("에러발생");
+      }
+    });
   })
+
 </script>
 
 
 <script>
-//모달 스크립트
-// Get the modal
-var modal = document.getElementById("myModal");
+  //모달 스크립트
+  // Get the modal
+  var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+  // When the user clicks the button, open the modal 
+  btn.onclick = function () {
+    modal.style.display = "block";
+  }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
     modal.style.display = "none";
   }
-}
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 
 
@@ -171,4 +196,5 @@ window.onclick = function(event) {
   }
 
 </script>
+
 </html>

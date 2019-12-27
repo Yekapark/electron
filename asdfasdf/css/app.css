@@ -45,6 +45,18 @@ body{
     font-size: 10pt;
   }
 
+  #keyword{
+    background-color: rgb(254, 255, 217);
+    padding: 0.5em;
+    margin: 1.8em;
+    margin-left: -1.0em;
+    min-width: 10em;
+    border-radius: 3em;
+    border: none;
+    outline: none;
+    float: right;
+  }
+
   #search{
     padding: 0.5em;
     margin: 1.8em;

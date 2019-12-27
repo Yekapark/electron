@@ -1,7 +1,13 @@
 
-
+// var codeList = new Array();
 
 function parsing(lastVal) {
+
+    $('.code-content').html('');
+    $('#main-area').html('');
+    
+
+    // console.log(codeList);
 
     const ff = require('fs');
     // const filePath = '/Users/pje/Desktop/hi.java'
@@ -64,6 +70,7 @@ function parsing(lastVal) {
 
                     if (isComment) {
                         if (array[i].includes(keyword)) {
+                            console.log(array[i].toLowerCase)
                             code = "";
                             maxline = 0;
                             isCode = true;
@@ -80,6 +87,9 @@ function parsing(lastVal) {
                     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     if (array[i].trim().startsWith('//')) {
                         if (array[i].includes(keyword)) {
+                            // if (array[i].toUpperCase.includes(keyword.toUpperCase) || array[i].toUpperCase.includes(keyword.toUpperCase)) {
+                            // console.log(array[i].toUpperCase)
+                            // console.log(array[i])
                             code = "";
                             maxline = 0;
                             isCode = true;
@@ -91,6 +101,7 @@ function parsing(lastVal) {
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 else{
                     if (array[i].includes(keyword) && !keywordOn) {
+                        console.log(array[i].toLowerCase)
                         keywordOn = true;
                         code = "";
                         maxline = 0;
@@ -117,8 +128,8 @@ function parsing(lastVal) {
                         code += array[i] + '\n';
                         isBrace = false;
                     }
-                    if (i == k + 1) {
-                        codeList.push(code);
+                    if (i == k + 1 || maxline >= 20) {
+                        $('.code-content').append('<pre class="language-java"><code class="language-java">' + code + '</code></pre>');
                         console.log(code);
                         code = "";
                         flag = false;
@@ -147,8 +158,8 @@ function parsing(lastVal) {
                             checkBrace.pop();
                             blank = true;
                         }
-                        if (checkBrace.length === 0 && blank) {
-                            codeList.push(code);
+                        if ((checkBrace.length === 0 && blank) || maxline >= 20) {
+                            $('.code-content').append('<pre class="language-java"><code class="language-java">' + code + '</code></pre>');
                             console.log(code);
                             code = '';
                             blank = false;
@@ -165,8 +176,8 @@ function parsing(lastVal) {
                         code += array[i] + '\n';
                         isBrace = false;
                     }
-                    if (i == k + 1) {
-                        codeList.push(code);
+                    if (i == k + 1 || maxline >= 20) {
+                        $('.code-content').append('<pre class="language-java"><code class="language-java">' + code + '</code></pre>');
                         console.log(code);
                         code = "";
                         flag = false;
@@ -179,8 +190,22 @@ function parsing(lastVal) {
                 //////////////////////////////////////////////////////////
             }                                               // java파일 한줄씩 비교 끝
         }
+        // list();
+        // document.getElementById('main-area').innerHTML ='';
+        // for(let j = 0; j < codeList.length; j++){
+        //     document.getElementById('main-area').innerHTML += '<pre>' + codeList[j] + '</pre>';
+        // }
     });
-    if(codeList !== null){
-    console.log(codeList)
-    }
+    // if(codeList !== null){
+    // console.log(codeList)
+    // }
+
 }
+
+// function list() {
+//     document.getElementById('main-area').innerHTML = '';
+//     for(let i = 0; i < codeList.length; i++){
+//         document.getElementById('main-area').innerHTML += codeList[i];
+//         document.getElementById('main-area').innerHTML += '\n\n'
+//     }
+// }
