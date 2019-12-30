@@ -37,6 +37,8 @@ const fss = require('fs');
 replay(testFolder)
 
 function replay(testFolder) {                       // 하위 디렉토리 검색해서 파일 불러오는 함수.
+
+
     try{
     fss.readdirSync(testFolder, {withFileTypes: true}).forEach(file => {
         if(file.isFile()){

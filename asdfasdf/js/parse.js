@@ -1,7 +1,9 @@
 
 // var codeList = new Array();
 
-function parsing(lastVal) {
+async function parsing(lastVal) {
+
+    checked = false;
 
     $('.code-content').html('');
     $('#main-area').html('');
@@ -35,7 +37,7 @@ function parsing(lastVal) {
         var tbrace = 0;
         var k = 0;
 
-        if (err) throw err;
+        if (err) {throw err;}
         else {
             var array = data.toString().split("\n");
 
@@ -198,9 +200,11 @@ function parsing(lastVal) {
     });
     // if(codeList !== null){
     // console.log(codeList)
-    // }
-
+    // }    
 }
+
+
+
 
 // function list() {
 //     document.getElementById('main-area').innerHTML = '';
