@@ -55,6 +55,6 @@ function replay(testFolder) {                       // 하위 디렉토리 검�
         
     });
 }catch(e){
- console.log(e.name)
+//  console.log(e.name)
 }
 }

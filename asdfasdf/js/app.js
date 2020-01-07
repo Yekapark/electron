@@ -23,7 +23,7 @@ let index;
 // fileSystem.js
 
 function getUsersHomeFolder(){
-    return osenv.home() + '\\Desktop';
+    return osenv.home();
 }
 
 function getFilesInFolder(folderPath, cb){
